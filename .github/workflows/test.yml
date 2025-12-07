@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use basic action
+      - name: Setup Deno
         uses: ./
 
       - name: Test basic usage
@@ -41,9 +41,9 @@ jobs:
       - name: Test action
         uses: ./
         with:
-          deno-version: 1.x
           deno-lock-path: "test/customized/deno.lock"
           directory: "test/customized"
 
       - name: Test customized usage
-        run: deno run -A --config=./test/customized/deno.json ./test/customized/main.ts
+        working-directory: test/customized
+        run: deno run -A main.ts
